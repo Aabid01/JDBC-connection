@@ -7,13 +7,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String url = "jdbc:mysql://localhost:3306/";
-        String user = "root";
-        String password = "qwerty";
+        String user = "user";
+        String password = "password";
 
         Connection con = null;
         Statement stm = null;
 
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, user, password);
             stm = con.createStatement();
 
@@ -63,6 +64,8 @@ public class Main {
 
         } catch (SQLException e) {
             System.out.println("An exception occured: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
 
